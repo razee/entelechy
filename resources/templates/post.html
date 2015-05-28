@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+<script type="text/javascript" src="out/main.js"></script>
+
   <div class="row">
     <div class="span12">
     <ul class="posts">
-        {% for post in posts %}
         <li class="post">
-            <h2><a href="posts/{{post.title|remove-tags:p|lower}}">{{post.title|remove-tags:p}}</a></h2>
-            <h3>{{post.category|markdown}}</h3>
-            <h4>{{post.date|markdown}}</h4>
+                <h1>{{post.title|markdown}}</h1>
+                <h3>{{post.category|markdown}}</h3>
+                <h4>{{post.date|markdown}}</h4>
             <div class="post-content">{{post.content|markdown}}</div>
         </li>
-        {% endfor %}
     </ul>
     </div>
   </div>

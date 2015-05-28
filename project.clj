@@ -17,10 +17,7 @@
                  [ring-middleware-format "0.4.0"]
                  [noir-exception "0.2.3"]
                  [bouncer "0.3.2"]
-                 [prone "0.8.1"]
-                 [ragtime "0.3.8"]
-                 [yesql "0.5.0-rc1"]
-                 [com.h2database/h2 "1.4.182"]]
+                 [prone "0.8.1"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "entelechy.jar"
@@ -29,37 +26,49 @@
 
   :main entelechy.core
 
-  :plugins [[lein-ring "0.9.1"]
-            [lein-environ "1.0.0"]
+  :plugins [[lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
-            [ragtime/ragtime.lein "0.3.8"]]
-  
+            [ragtime/ragtime.lein "0.3.8"]
+            [lein-cljsbuild "1.0.4"]]
+
+
+  :cljsbuild
+  {:builds {:app {:source-paths ["src-cljs"]
+                 :compiler {:output-to     "resources/public/js/app.js"
+                            :output-dir    "resources/public/js/out"
+                            :source-map    "resources/public/js/out.js.map"
+                            :externs       ["react/externs/react.js"]
+                            :optimizations :none
+                            :pretty-print  true}}}}
+
 
   :ring {:handler entelechy.handler/app
          :init    entelechy.handler/init
          :destroy entelechy.handler/destroy
          :uberwar-name "entelechy.war"}
-  
-  :ragtime
-  {:migrations ragtime.sql.files/migrations
-   :database "jdbc:h2:./site.db"}
-  
-  
-  
-  
+
+
+
   :profiles
   {:uberjar {:omit-source true
              :env {:production true}
-            
+             :hooks ['leiningen.cljsbuild]
+             :cljsbuild {:jar true
+                          :builds
+                           {:app
+                           {:compiler
+                           {:optimizations :advanced
+                            :pretty-print false}}}}
+
              :aot :all}
    :dev {:dependencies [[ring-mock "0.1.5"]
                         [ring/ring-devel "1.3.2"]
                         [pjstadig/humane-test-output "0.7.0"]
                         ]
          :source-paths ["env/dev/clj"]
-         
-        
-         
+
+
+
          :repl-options {:init-ns entelechy.repl}
          :injections [(require 'pjstadig.humane-test-output)
                       (pjstadig.humane-test-output/activate!)]
