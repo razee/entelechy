@@ -4,6 +4,7 @@
   :url "http://example.com/FIXME"
 
   :dependencies [[org.clojure/clojure "1.6.0"]
+                 [org.clojure/clojurescript "0.0-3149"]
                  [ring-server "0.4.0"]
                  [selmer "0.8.2"]
                  [com.taoensso/timbre "3.4.0"]
@@ -26,7 +27,8 @@
 
   :main entelechy.core
 
-  :plugins [[lein-environ "1.0.0"]
+  :plugins [[lein-ring "0.9.1"]
+            [lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
             [ragtime/ragtime.lein "0.3.8"]
             [lein-cljsbuild "1.0.4"]]
@@ -52,7 +54,7 @@
   :profiles
   {:uberjar {:omit-source true
              :env {:production true}
-             :hooks ['leiningen.cljsbuild]
+             :hooks [leiningen.cljsbuild]
              :cljsbuild {:jar true
                           :builds
                            {:app
