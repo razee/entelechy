@@ -2,7 +2,7 @@
 /lib
 /classes
 /checkouts
-/posts
+resources/posts
 /migrations
 pom.xml
 *.jar

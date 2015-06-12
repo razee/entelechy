@@ -33,6 +33,8 @@
             [ragtime/ragtime.lein "0.3.8"]
             [lein-cljsbuild "1.0.4"]]
 
+  ;:resource-paths ["resources/posts"] ; non-code files included in classpath/jar
+
 
   :cljsbuild
   {:builds {:app {:source-paths ["src-cljs"]
