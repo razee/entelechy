@@ -1,5 +1,6 @@
 (ns entelechy.routes.home
-  (:require [entelechy.layout :as layout]
+  (:require [clojure.core.memoize :as memo]
+            [entelechy.layout :as layout]
             [compojure.core :refer [defroutes GET POST]]
             [clojure.java.io :as io]
             [bouncer.core :as b]
