@@ -28,6 +28,16 @@
   <body>
       <ul class="progress">
           <li class="middleblob"><a href="#"></a></li>
+          <div tabindex="0" class="onclick-menu">
+          <ul class="onclick-menu-content">
+            <li {% ifequal page "home.html" %} class="active"{%endifequal%}>
+              <a href="{{servlet-context}}/">Home</a>
+                </li>
+            <li {% ifequal page "about.html" %} class="active"{%endifequal%}>
+              <a href="{{servlet-context}}/about">About</a>
+            </li>
+          </ul>
+        </div>
           <li class="blob"><a href="#"></a></li>
       </ul>
 
@@ -37,16 +47,7 @@
         <div class="navbar-header">
          <!-- <a class="navbar-brand" href="{{servlet-context}}/">entelechy</a> -->
         </div>
-        <div class="navbar-collapse collapse ">
-          <ul class="nav navbar-nav">
-            <li {% ifequal page "home.html" %} class="active"{%endifequal%}>
-              <a href="{{servlet-context}}/">Home</a>
-            </li>
-            <li {% ifequal page "about.html" %} class="active"{%endifequal%}>
-              <a href="{{servlet-context}}/about">About</a>
-            </li>
-          </ul>
-        </div>
+
       </div>
     </div>
 

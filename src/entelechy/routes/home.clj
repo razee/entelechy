@@ -13,18 +13,19 @@
 (defn post-location []
   (env :blog-posts))
 
-(defn slurp-n-split [posts]
-  (zipmap [:title :category :date :content] (st/split (slurp posts) #"卍")))
+
+(defn slurp-n-split [post]
+  (zipmap [:title :category :date :content] (st/split (slurp post) #"卍")))
 
 (defn get-post [post]
   (layout/render
    "post.html"
-  {:post (slurp-n-split (io/file (str (post-location) (st/replace post " " "-") ".md")))}))
+  {:post (slurp-n-split (io/file (str "resources/posts/" (st/replace post " " "-") ".md")))}))
 
 
 
 (defn get-all-posts []
-  (map slurp-n-split (.listFiles (post-location))
+  (map slurp-n-split (.listFiles (io/file "resources/posts/"))))
 
 
 ;(defn validate-post [params]
